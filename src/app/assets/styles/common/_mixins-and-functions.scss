@@ -1,0 +1,110 @@
+$browser-context: 16;
+
+@function em($pixels, $context: $browser-context) {
+  @return #{$pixels/$context}em;
+}
+
+@mixin translate($x, $y) {
+  -webkit-transform: translate($x, $y);
+  -moz-transform: translate($x, $y);
+  -ms-transform: translate($x, $y);
+  -o-transform: translate($x, $y);
+  transform: translate($x, $y);
+}
+
+@mixin box-shadow($shadow1, $shadow2: false) {
+  @if ($shadow2 == false) {
+    -webkit-box-shadow: $shadow1;
+    -moz-box-shadow: $shadow1;
+    box-shadow: $shadow1;
+  } @else {
+    -webkit-box-shadow: unquote($shadow1 + ", " + $shadow2);
+    -moz-box-shadow: unquote($shadow1 + ", " + $shadow2);
+    box-shadow: unquote($shadow1 + ", " + $shadow2);
+  }
+}
+
+@mixin rotate($deg) {
+  @include transform(rotate(#{$deg}deg));
+}
+
+@mixin transform($transforms) {
+  -moz-transform: $transforms;
+  -o-transform: $transforms;
+  -ms-transform: $transforms;
+  -webkit-transform: $transforms;
+  transform: $transforms;
+}
+
+@mixin line-clamp($numLines: 1, $lineHeight: 1.45) {
+  overflow: hidden;
+  text-overflow: -o-ellipsis-lastline;
+  text-overflow: ellipsis;
+  display: block;
+  /* autoprefixer: off */
+  display: -webkit-box;
+  -webkit-line-clamp: $numLines;
+  -webkit-box-orient: vertical;
+  max-height: $numLines * $lineHeight + unquote("em");
+  @if ($lineHeight != 1.45) {
+    height: $lineHeight * $numLines;
+  }
+}
+
+@mixin border-radius($radius) {
+  border-radius: $radius;
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+}
+
+@mixin horizontal-gradient($from, $to, $stop: 100%) {
+  background-color: $from;
+  background-image: -moz-linear-gradient(left, $from 0%, $to $stop);
+  background-image: -webkit-gradient(
+                  linear,
+                  left top,
+                  right top,
+                  color-stop(0%, $from),
+                  color-stop($stop, $to)
+  );
+  background-image: -webkit-linear-gradient(left, $from 0%, $to $stop);
+  background-image: -o-linear-gradient(left, $from 0%, $to $stop);
+  background: -ms-linear-gradient(left, $from 0%, $to $stop);
+  background: linear-gradient(to right, $from 0%, $to $stop);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$from', endColorstr='$to', GradientType=1);
+}
+
+@mixin transition($transition...) {
+  -moz-transition: $transition;
+  -o-transition: $transition;
+  -webkit-transition: $transition;
+  transition: $transition;
+}
+
+@mixin transition-property($property...) {
+  -moz-transition-property: $property;
+  -o-transition-property: $property;
+  -webkit-transition-property: $property;
+  transition-property: $property;
+}
+
+@mixin transition-duration($duration...) {
+  -moz-transition-duration: $duration;
+  -o-transition-duration: $duration;
+  -webkit-transition-duration: $duration;
+  transition-duration: $duration;
+}
+
+@mixin transition-timing-function($timing...) {
+  -moz-transition-timing-function: $timing;
+  -o-transition-timing-function: $timing;
+  -webkit-transition-timing-function: $timing;
+  transition-timing-function: $timing;
+}
+
+@mixin transition-delay($delay...) {
+  -moz-transition-delay: $delay;
+  -o-transition-delay: $delay;
+  -webkit-transition-delay: $delay;
+  transition-delay: $delay;
+}

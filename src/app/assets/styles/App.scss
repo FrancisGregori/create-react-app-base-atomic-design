@@ -1,0 +1,8 @@
+@import "common/mixins-and-functions";
+@import "common/variables";
+@import "common/reset";
+
+body, html {
+  overflow-x: hidden;
+}
+

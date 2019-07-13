@@ -1,0 +1,28 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "prettier-standard",
+    "plugin:react/recommended"
+  ],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "moduleDirectory": [
+          "node_modules",
+          "src/"
+        ]
+      }
+    }
+  },
+  "plugins": [
+    "react-hooks"
+  ],
+  "rules": {
+    "react/prop-types": 0,
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
+  },
+  "env": {
+    "jest": true
+  }
+}
